@@ -8,7 +8,7 @@
   <style>
     :root{--purple:#7c3aed;--ink:#242033;--muted:#6d6878;--line:#e9e5f0;--bg:#faf9fc}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Malayalam",sans-serif;line-height:1.65}
-    .wrap{width:min(720px,100% - 28px);margin:auto;padding:24px 0 42px}
+    .wrap{width:min(720px,calc(100% - 28px));margin:auto;padding:24px 0 42px}
     header{text-align:center;padding:24px 14px 20px}
     .brand{display:inline-flex;align-items:center;gap:8px;color:var(--purple);font-weight:800;letter-spacing:.2px}
     h1{font-size:clamp(25px,5vw,34px);line-height:1.3;margin:12px 0 6px}
@@ -28,10 +28,53 @@
     input:focus,select:focus,textarea:focus{outline:2px solid #c4b5fd;border-color:var(--purple)}
     textarea{min-height:80px;resize:vertical}
     .required{color:#b42318}
+    .phone-field{display:flex;align-items:stretch;gap:8px}
+    .phone-prefix{display:flex;align-items:center;justify-content:center;min-width:64px;padding:0 12px;border:1px solid #dcd6e7;border-radius:10px;background:#f5f2fa;font-weight:750;color:var(--ink)}
+    .phone-field input{min-width:0}
     .submit{width:100%;font-size:16px}
     #status{font-size:14px;margin-top:8px}
     footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
     @media(max-width:540px){.grid{grid-template-columns:1fr}.card{padding:17px}.wrap{width:min(100% - 22px,720px)}}
+
+    .service-choice h2{margin-bottom:6px}
+    .service-option{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:14px;padding:15px;margin-top:13px;cursor:pointer;transition:border-color .15s,background .15s}
+    .service-option:has(input:checked){border-color:var(--purple);background:#faf7ff}
+    .service-option input{width:19px;height:19px;flex:0 0 19px;margin:4px 0 0;accent-color:var(--purple)}
+    .option-content{display:grid;gap:5px;font-weight:400}
+    .option-title{font-size:17px;font-weight:800;color:var(--ink)}
+    .free-girls{color:#16803d}
+    .service-action{padding-left:31px}
+    .service-separator{text-align:center;color:var(--muted);font-size:13px;margin:12px 0 4px}
+    [hidden]{display:none!important}
+    .service-action .btn{width:100%;text-align:center}
+    .btn:focus-visible,.service-option:focus-within{outline:3px solid #c4b5fd;outline-offset:2px}
+    @media(max-width:540px){
+      .wrap{width:calc(100% - 24px);padding:12px 0 28px}
+      header{padding:20px 8px 14px}
+      h1{font-size:25px}
+      .card{padding:16px;margin:11px 0;border-radius:15px}
+      h2{font-size:18px}
+      .service-option{padding:13px 11px;gap:9px}
+      .option-title{font-size:16px}
+      .btn{width:100%;padding:12px 14px}
+      .service-action{padding-left:0}
+      input,select,textarea{font-size:16px}
+    }
+
+    .submission-success{max-width:720px;margin:24px auto;padding:26px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 5px 20px #24104408}
+    .submission-success h2{color:#16803d;font-size:23px;margin:0 0 14px}
+    .submission-success p{margin:11px 0}
+    .submission-success .fee-note{padding:13px;background:#faf7ff;border-radius:12px}
+    .submission-success .btn{width:100%;text-align:center;margin-top:18px}
+    .submission-success ul{padding-left:22px;margin:8px 0}
+
+    .confirm-check{display:flex;align-items:flex-start;gap:10px;margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#faf7ff;font-weight:600}
+    .confirm-check input{width:20px;height:20px;flex:0 0 20px;margin:3px 0 0;accent-color:var(--purple)}
+    #confirm-and-whatsapp:disabled{opacity:.45;cursor:not-allowed}
+    #decline-confirmation{width:100%;margin-top:8px}
+
+    @media(max-width:540px){.submission-success{margin:12px 0;padding:18px;border-radius:15px}.submission-success h2{font-size:21px}}
+
   </style>
 </head>
 <body>
@@ -43,20 +86,38 @@
     <span class="pill">നിങ്ങൾക്ക് അനുയോജ്യമായ സേവനം തിരഞ്ഞെടുക്കാം</span>
   </header>
 
-  <section class="card">
-    <h2>💻 1. Online Service</h2>
-    <p class="price">പൂർണ്ണമായും സൗജന്യം</p>
-    <p>വെബ്സൈറ്റിൽ രജിസ്റ്റർ ചെയ്താൽ നിങ്ങളുടെ വിവരങ്ങൾക്ക് അനുയോജ്യമായ പ്രൊഫൈലുകൾ ലഭ്യമാണെങ്കിൽ Matching Profiles-ൽ കാണാം. ഇഷ്ടപ്പെട്ട പ്രൊഫൈലിന് Interest അയക്കാം. അവർ Accept ചെയ്താൽ കോൺടാക്ട് നമ്പർ കാണാം.</p>
-    <a class="btn" href="https://matchwithijas.com/register" target="_blank" rel="noopener">സൗജന്യമായി രജിസ്റ്റർ ചെയ്യുക</a>
-  </section>
+  <section class="card service-choice">
+    <h2>ആദ്യം നിങ്ങൾക്ക് ആവശ്യമുള്ള സേവനം തിരഞ്ഞെടുക്കുക</h2>
+    <p class="note">ഒരു സേവനം തിരഞ്ഞെടുക്കുമ്പോൾ അതിനുള്ള തുടർനടപടി മാത്രം താഴെ കാണിക്കും.</p>
 
-  <section class="card">
-    <h2>🤝 2. Offline Assisted Service</h2>
-    <p class="price">രജിസ്ട്രേഷൻ ഫീസ്: ₹1,999</p>
-    <p>നിങ്ങളെ നേരിട്ട് കണ്ട്, നിങ്ങളുടെ ആവശ്യങ്ങളും താൽപര്യങ്ങളും മനസ്സിലാക്കി അനുയോജ്യമായ വിവാഹ ആലോചനകൾ കണ്ടെത്തി നൽകുന്ന സേവനമാണിത്.</p>
-    <p><strong>👩 പെൺകുട്ടികൾക്ക് നിലവിൽ സൗജന്യം.</strong></p>
-    <p class="note">ഈ സേവനം ആവശ്യപ്പെടുന്നവർ താഴെയുള്ള ഫോം പൂരിപ്പിക്കുക. വിവരങ്ങൾ ലഭിച്ച ശേഷം ബന്ധപ്പെടുന്നതാണ്.</p>
-    <a class="btn secondary" href="#offline-form">Offline Service-ന് അപേക്ഷിക്കുക</a>
+    <label class="service-option" for="choose-offline">
+      <input type="radio" name="serviceChoice" id="choose-offline" value="offline">
+      <span class="option-content">
+        <span class="option-title">🤝 1. Offline Assisted Service</span>
+        <span class="price">₹1,999 രജിസ്ട്രേഷൻ ഫീസ്</span>
+        <span>നിങ്ങളെ നേരിട്ട് കണ്ട് നിങ്ങളുടെ ആവശ്യങ്ങൾ മനസ്സിലാക്കി അനുയോജ്യമായ വിവാഹ ആലോചനകൾ കണ്ടെത്തി നൽകുന്ന സേവനം.</span>
+        <strong class="free-girls">👩 പെൺകുട്ടികൾക്ക് നിലവിൽ സൗജന്യം.</strong>
+      </span>
+    </label>
+
+    <div id="offline-action" class="service-action" hidden>
+      <a class="btn" href="#offline-form">Offline Service ഫോം പൂരിപ്പിക്കുക</a>
+    </div>
+
+    <div class="service-separator">അല്ലെങ്കിൽ</div>
+
+    <label class="service-option" for="choose-online">
+      <input type="radio" name="serviceChoice" id="choose-online" value="online">
+      <span class="option-content">
+        <span class="option-title">💻 2. Online Service</span>
+        <span class="price">പൂർണ്ണമായും സൗജന്യം</span>
+        <span>വെബ്സൈറ്റിൽ രജിസ്റ്റർ ചെയ്താൽ മാച്ചിങ് പ്രൊഫൈലുകൾ കാണാം. ഇഷ്ടപ്പെട്ട പ്രൊഫൈലിന് Interest അയക്കാം. അവർ Accept ചെയ്താൽ കോൺടാക്ട് നമ്പർ കാണാം.</span>
+      </span>
+    </label>
+
+    <div id="online-action" class="service-action" hidden>
+      <a class="btn" href="https://matchwithijas.com/register" target="_blank" rel="noopener">സൗജന്യമായി രജിസ്റ്റർ ചെയ്യുക</a>
+    </div>
   </section>
 
   <section class="card" id="offline-form">
@@ -66,22 +127,73 @@
       <div>
         <label for="forWhom">ആർക്കു വേണ്ടിയാണ് വിവാഹം നോക്കുന്നത്? <span class="required">*</span></label>
         <select id="forWhom" name="forWhom" required>
-          <option value="">തിരഞ്ഞെടുക്കുക</option><option>സ്വന്തത്തിന്</option><option>മകൻ</option><option>മകൾ</option><option>സഹോദരൻ</option><option>സഹോദരി</option><option>മറ്റുള്ളവർ</option>
+          <option value="">തിരഞ്ഞെടുക്കുക</option>
+          <option>സ്വയം</option><option>മകൻ</option><option>മകൾ</option>
+          <option>സഹോദരൻ</option><option>സഹോദരി</option><option>മറ്റുള്ളവർ</option>
         </select>
       </div>
       <div class="grid">
-        <div><label for="age">വയസ്സ് <span class="required">*</span></label><input id="age" name="age" type="number" min="18" max="100" required placeholder="ഉദാ: 27"></div>
-        <div><label for="marital">വിവാഹ സ്റ്റാറ്റസ് <span class="required">*</span></label><select id="marital" name="marital" required><option value="">തിരഞ്ഞെടുക്കുക</option><option>അവിവാഹിതൻ / അവിവാഹിത</option><option>വിവാഹമോചിതൻ / വിവാഹമോചിത</option><option>വിധവ / വിധുരൻ</option></select></div>
-        <div><label for="religion">മതം <span class="required">*</span></label><input id="religion" name="religion" required placeholder="മതം"></div>
-        <div><label for="sect">Cast / Sect</label><input id="sect" name="sect" placeholder="വിഭാഗം / സമുദായം"></div>
+        <div>
+          <label for="age">വയസ്സ് (18–60) <span class="required">*</span></label>
+          <input id="age" name="age" type="number" min="18" max="60" step="1" required placeholder="18 - 60">
+          <small class="note">18 മുതൽ 60 വയസ്സ് വരെ മാത്രം.</small>
+        </div>
+        <div>
+          <label for="marital">വിവാഹ സ്റ്റാറ്റസ് <span class="required">*</span></label>
+          <select id="marital" name="marital" required>
+            <option value="">തിരഞ്ഞെടുക്കുക</option>
+            <option>ആദ്യവിവാഹം</option><option>പുനർവിവാഹം</option><option>നിക്കാഹ് ഡിവോഴ്സ്</option>
+          </select>
+        </div>
+        <div>
+          <label for="religion">മതം <span class="required">*</span></label>
+          <select id="religion" name="religion" required>
+            <option value="">തിരഞ്ഞെടുക്കുക</option>
+            <option>ഹിന്ദു</option><option>മുസ്ലിം</option><option>ക്രിസ്ത്യൻ</option>
+          </select>
+        </div>
+        <div>
+          <label for="sect">ജാതി / വിഭാഗം (Cast / Sect)</label>
+          <select id="sect" name="sect">
+            <option value="">തിരഞ്ഞെടുക്കുക</option>
+            <option>Muslim - Sunni</option><option>Muslim - Salafi</option><option>Muslim - Other</option>
+            <option>Hindu - Thiyya</option><option>Hindu - Nair</option><option>Hindu - SC, ST</option><option>Hindu - Vishvakarma</option>
+            <option value="Other">മറ്റുള്ളവ</option>
+          </select>
+          <input id="sectOther" type="text" placeholder="വിഭാഗം എഴുതുക" hidden style="margin-top:8px">
+        </div>
       </div>
-      <div><label for="education">വിദ്യാഭ്യാസ യോഗ്യത</label><input id="education" name="education" placeholder="ഉദാ: Degree, PG"></div>
-      <div><label for="job">ജോലി / തൊഴിൽ വിവരങ്ങൾ</label><input id="job" name="job" placeholder="ജോലി / തൊഴിൽ"></div>
+      <div>
+        <label for="education">വിദ്യാഭ്യാസ യോഗ്യത</label>
+        <select id="education" name="education">
+          <option value="">തിരഞ്ഞെടുക്കുക</option>
+          <option>ബിരുദം / ഡിഗ്രി</option><option>ബിരുദാനന്തര ബിരുദം / പി.ജി.</option>
+          <option>പ്രൊഫഷണൽ ഡിഗ്രി</option><option>ഡിപ്ലോമ / ഐ.ടി.ഐ.</option><option>സ്കൂൾ വിദ്യാഭ്യാസം</option>
+        </select>
+      </div>
+      <div>
+        <label for="job">ജോലി / തൊഴിൽ വിവരങ്ങൾ</label>
+        <select id="job" name="job">
+          <option value="">തിരഞ്ഞെടുക്കുക</option>
+          <option>സർക്കാർ ജോലി</option><option>സ്വകാര്യ ജോലി</option><option>ബിസിനസ്സ്</option>
+          <option>വിദേശത്ത്</option><option>മറ്റ് തൊഴിലുകൾ</option><option>പഠിക്കുന്നു</option>
+          <option value="Other">മറ്റുള്ളവ</option>
+        </select>
+        <input id="jobOther" type="text" placeholder="തൊഴിൽ വിവരങ്ങൾ എഴുതുക" hidden style="margin-top:8px">
+      </div>
       <div class="grid">
         <div><label for="district">ജില്ല <span class="required">*</span></label><input id="district" name="district" required placeholder="ജില്ല"></div>
         <div><label for="place">സ്ഥലം <span class="required">*</span></label><input id="place" name="place" required placeholder="സ്ഥലം"></div>
       </div>
-      <div><label for="phone">Contact Number <span class="required">*</span></label><input id="phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9+ ()-]{10,18}" required placeholder="മൊബൈൽ നമ്പർ"></div>
+      <div>
+        <label for="phone">മൊബൈൽ നമ്പർ <span class="required">*</span></label>
+        <div class="phone-field"><span class="phone-prefix">+91</span>
+          <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national"
+                 pattern="[6-9][0-9]{9}" minlength="10" maxlength="10" required
+                 placeholder="10 അക്ക മൊബൈൽ നമ്പർ" aria-describedby="phone-help">
+        </div>
+        <small id="phone-help" class="note">ഇന്ത്യൻ മൊബൈൽ നമ്പർ 10 അക്കമായി നൽകുക.</small>
+      </div>
       <button class="btn submit" type="submit">വിവരങ്ങൾ സമർപ്പിക്കുക</button>
       <div id="status" role="status" aria-live="polite"></div>
     </form>
@@ -92,6 +204,32 @@
     <p>ഫോമിൽ നൽകുന്ന വിവരങ്ങൾ Offline Service സംബന്ധിച്ച് നിങ്ങളെ ബന്ധപ്പെടുന്നതിനായി മാത്രമാണ് ഉപയോഗിക്കുന്നത്. ദയവായി ശരിയായ വിവരങ്ങൾ നൽകുക.</p>
     <p class="note">കൂടുതൽ വിവരങ്ങൾക്ക് WhatsApp: 9746900055</p>
   </section>
+
+  <section class="submission-success" id="submission-confirmation" hidden aria-live="polite">
+    <h2>സേവന വിവരങ്ങൾ വായിച്ച് സ്ഥിരീകരിക്കുക</h2>
+    <p>നിങ്ങളുടെ പ്രൊഫൈൽ പരിശോധിച്ച് അനുയോജ്യമായ മാച്ചുകൾ കണ്ടെത്താൻ ഞങ്ങൾ സഹായിക്കും.</p>
+
+    <p>ഞങ്ങളുടെ സേവനം സാധാരണ ബ്രോക്കർമാരിൽ നിന്നും മാട്രിമോണി സൈറ്റുകളിൽ നിന്നും വ്യത്യസ്തമാണ്. കോൺടാക്ട് നമ്പർ നേരിട്ട് ഷെയർ ചെയ്യുന്നതിന് പകരം, ഇരുവിഭാഗത്തിന്റെയും താൽപര്യം മനസ്സിലാക്കി പെണ്ണുകാണൽ മീറ്റിംഗുകൾ ക്രമീകരിക്കുകയാണ് ഞങ്ങൾ ചെയ്യുന്നത്. 🤝</p>
+
+    <div class="fee-note">
+      <p><strong>രജിസ്ട്രേഷൻ ഫീസ്:</strong> ₹1,999</p>
+      <p><strong>വിവാഹം ഞങ്ങൾ വഴി ഉറപ്പിച്ചാൽ:</strong> സർവീസ് ചാർജ് ₹15,000 മുതൽ.</p>
+      <p>നിങ്ങളുടെ ആവശ്യങ്ങളും മുൻഗണനകളും അനുസരിച്ച് ബ്രോക്കർ ഫീസ് മാറാം. നേരിട്ട് സംസാരിച്ച് ഉറപ്പിക്കാം.</p>
+    </div>
+
+    <p><strong>ഞങ്ങളുടെ ഉറപ്പ്:</strong> 10 മാസത്തിനുള്ളിൽ ഒരു മാച്ചിങ് കേസ് പോലും നൽകാൻ കഴിയാത്ത പക്ഷം, രജിസ്ട്രേഷൻ ഫീസ് തിരികെ നൽകുന്നതാണ്.</p>
+    <p class="note">* റീഫണ്ട് നൽകുമ്പോൾ Home Visit Charge ₹600 കുറയ്ക്കുന്നതാണ്.</p>
+
+    <label class="confirm-check" for="fee-confirm">
+      <input type="checkbox" id="fee-confirm">
+      <span>മുകളിലെ വിവരങ്ങളും ഫീസും ഞാൻ വായിച്ചു മനസ്സിലാക്കി. ₹1,999 രജിസ്ട്രേഷൻ ഫീസ് നൽകി Offline Service തുടരാൻ താൽപര്യമുണ്ട്.</span>
+    </label>
+
+    <button class="btn" id="confirm-and-whatsapp" type="button" disabled>Confirm &amp; Continue to WhatsApp</button>
+    <button class="btn secondary" id="decline-confirmation" type="button">ഇപ്പോൾ താൽപര്യമില്ല</button>
+    <p class="note" id="confirm-status" role="status" aria-live="polite"></p>
+  </section>
+
   <footer>© Match With Ijas · Chelari, Malappuram</footer>
 </div>
 
@@ -99,32 +237,145 @@
   // Google Apps Script Web App URL ഇവിടെ ചേർക്കുക.
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQp4NsCe6dRtMI_hHDc3Gj3Edrp9TynuNUBwIk5KtI0GTZtU0hzdWDTconvJ-26ggQkQ/exec";
 
+  const offlineChoice = document.getElementById("choose-offline");
+  const onlineChoice = document.getElementById("choose-online");
+  const offlineAction = document.getElementById("offline-action");
+  const onlineAction = document.getElementById("online-action");
+  const offlineFormSection = document.getElementById("offline-form");
+
+  function updateServiceChoice() {
+    const isOffline = offlineChoice.checked;
+    const isOnline = onlineChoice.checked;
+    offlineAction.hidden = !isOffline;
+    onlineAction.hidden = !isOnline;
+    offlineFormSection.hidden = !isOffline;
+  }
+
+  offlineChoice.addEventListener("change", updateServiceChoice);
+  onlineChoice.addEventListener("change", updateServiceChoice);
+  updateServiceChoice();
+
+  const sectSelect = document.getElementById("sect");
+  const sectOther = document.getElementById("sectOther");
+  const jobSelect = document.getElementById("job");
+  const jobOther = document.getElementById("jobOther");
+
+  function syncOtherField(select, input) {
+    const show = select.value === "Other";
+    input.hidden = !show;
+    input.required = show;
+    if (!show) input.value = "";
+  }
+  sectSelect.addEventListener("change", () => syncOtherField(sectSelect, sectOther));
+  jobSelect.addEventListener("change", () => syncOtherField(jobSelect, jobOther));
+
+  const ageInput = document.getElementById("age");
+  ageInput.addEventListener("input", () => {
+    ageInput.setCustomValidity(ageInput.value && (Number(ageInput.value) < 18 || Number(ageInput.value) > 60)
+      ? "വയസ്സ് 18 മുതൽ 60 വരെ ആയിരിക്കണം." : "");
+  });
+
+  const phoneInput = document.getElementById("phone");
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value.replace(/\\D/g, "").slice(0, 10);
+    phoneInput.setCustomValidity(phoneInput.value && !/^[6-9][0-9]{9}$/.test(phoneInput.value)
+      ? "ശരിയായ 10 അക്ക ഇന്ത്യൻ മൊബൈൽ നമ്പർ നൽകുക." : "");
+  });
+
   const form = document.getElementById("leadForm");
   const statusBox = document.getElementById("status");
-  form.addEventListener("submit", async (event) => {
+  const confirmationScreen = document.getElementById("submission-confirmation");
+  const feeConfirm = document.getElementById("fee-confirm");
+  const confirmButton = document.getElementById("confirm-and-whatsapp");
+  const declineButton = document.getElementById("decline-confirmation");
+  const confirmStatus = document.getElementById("confirm-status");
+  const whatsappUrl = "https://wa.me/919746900055?text=I%20have%20reviewed%20the%20Offline%20Service%20fees%20and%20want%20to%20continue.";
+  let pendingLeadData = null;
+
+  function showOnly(elementToShow) {
+    const wrap = document.querySelector(".wrap");
+    Array.from(wrap.children).forEach((element) => {
+      element.hidden = element !== elementToShow;
+    });
+    elementToShow.hidden = false;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
     if (GOOGLE_SCRIPT_URL.startsWith("PASTE_")) {
       statusBox.textContent = "ഫോം കണക്റ്റ് ചെയ്യാൻ Google Apps Script URL ചേർക്കേണ്ടതുണ്ട്.";
       return;
     }
-    const data = Object.fromEntries(new FormData(form).entries());
-    data.timestamp = new Date().toISOString();
-    const button = form.querySelector("button[type=submit]");
-    button.disabled = true; button.textContent = "സമർപ്പിക്കുന്നു...";
+
+    // Keep the lead in browser memory only. It is NOT sent to Google Sheets yet.
+    pendingLeadData = Object.fromEntries(new FormData(form).entries());
+    if (pendingLeadData.sect === "Other") pendingLeadData.sect = sectOther.value.trim();
+    if (pendingLeadData.job === "Other") pendingLeadData.job = jobOther.value.trim();
+    pendingLeadData.phone = "+91" + phoneInput.value;
+    pendingLeadData.timestamp = new Date().toISOString();
+
+    feeConfirm.checked = false;
+    confirmButton.disabled = true;
+    confirmStatus.textContent = "";
+    showOnly(confirmationScreen);
+  });
+
+  feeConfirm.addEventListener("change", () => {
+    confirmButton.disabled = !feeConfirm.checked;
+  });
+
+  async function saveLeadWithInterestStatus(interestStatus) {
+    if (!pendingLeadData) return;
+
+    confirmButton.disabled = true;
+    declineButton.disabled = true;
+    confirmStatus.textContent = "നിങ്ങളുടെ പ്രതികരണം രേഖപ്പെടുത്തുന്നു...";
+
+    // Save an explicit status so the Sheet can distinguish interested
+    // from not-interested enquiries.
+    pendingLeadData.interestStatus = interestStatus;
+
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: {"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
-        body: new URLSearchParams(data).toString()
+        body: new URLSearchParams(pendingLeadData).toString()
       });
-      statusBox.textContent = "നന്ദി! നിങ്ങളുടെ വിവരങ്ങൾ സമർപ്പിച്ചു. ഞങ്ങൾ ബന്ധപ്പെടുന്നതാണ്.";
-      form.reset();
+
+      if (interestStatus === "Interested") {
+        // Interested leads continue to WhatsApp.
+        window.location.href = whatsappUrl;
+        return;
+      }
+
+      // Not-interested leads are saved, but are not redirected to WhatsApp.
+      confirmStatus.textContent = "നിങ്ങളുടെ പ്രതികരണം രേഖപ്പെടുത്തി. നന്ദി!";
+      const feeNote = confirmationScreen.querySelector(".fee-note");
+      const confirmCheck = confirmationScreen.querySelector(".confirm-check");
+      if (feeNote) feeNote.hidden = true;
+      if (confirmCheck) confirmCheck.hidden = true;
+      confirmButton.hidden = true;
+      declineButton.hidden = true;
     } catch (error) {
-      statusBox.textContent = "സമർപ്പിക്കാൻ കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ WhatsApp ചെയ്യുക.";
-    } finally {
-      button.disabled = false; button.textContent = "വിവരങ്ങൾ സമർപ്പിക്കുക";
+      confirmStatus.textContent = "വിവരങ്ങൾ അയക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.";
+      confirmButton.disabled = false;
+      declineButton.disabled = false;
     }
+  }
+
+  confirmButton.addEventListener("click", async () => {
+    if (!feeConfirm.checked || !pendingLeadData) return;
+    await saveLeadWithInterestStatus("Interested");
+  });
+
+  declineButton.addEventListener("click", async () => {
+    // Save the enquiry with Not Interested status instead of discarding it.
+    await saveLeadWithInterestStatus("Not Interested");
   });
 </script>
 </body>
