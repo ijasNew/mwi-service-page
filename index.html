@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7c3aed">
+  <title>Match With Ijas | വിവാഹ സേവനങ്ങൾ</title>
+  <style>
+    :root{--purple:#7c3aed;--ink:#242033;--muted:#6d6878;--line:#e9e5f0;--bg:#faf9fc}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Malayalam",sans-serif;line-height:1.65}
+    .wrap{width:min(720px,100% - 28px);margin:auto;padding:24px 0 42px}
+    header{text-align:center;padding:24px 14px 20px}
+    .brand{display:inline-flex;align-items:center;gap:8px;color:var(--purple);font-weight:800;letter-spacing:.2px}
+    h1{font-size:clamp(25px,5vw,34px);line-height:1.3;margin:12px 0 6px}
+    .sub{color:var(--muted);margin:0}
+    .pill{display:inline-block;background:#f0eaff;color:#5b21b6;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;margin-top:12px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 20px #24104408}
+    h2{font-size:20px;margin:0 0 8px} p{margin:7px 0}
+    .price{font-weight:800;color:var(--purple)}
+    .btn{display:inline-flex;justify-content:center;align-items:center;text-decoration:none;background:var(--purple);color:white;border:0;border-radius:12px;padding:11px 17px;font-weight:750;margin-top:12px;cursor:pointer}
+    .btn.secondary{background:#f1edfa;color:#5426a5}
+    .actions{display:flex;flex-wrap:wrap;gap:9px}
+    .note{font-size:14px;color:var(--muted)}
+    form{display:grid;gap:13px;margin-top:14px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-weight:650;font-size:14px;margin-bottom:5px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #dcd6e7;border-radius:10px;background:white;color:var(--ink);font:inherit}
+    input:focus,select:focus,textarea:focus{outline:2px solid #c4b5fd;border-color:var(--purple)}
+    textarea{min-height:80px;resize:vertical}
+    .required{color:#b42318}
+    .submit{width:100%;font-size:16px}
+    #status{font-size:14px;margin-top:8px}
+    footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
+    @media(max-width:540px){.grid{grid-template-columns:1fr}.card{padding:17px}.wrap{width:min(100% - 22px,720px)}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">💜 MATCH WITH IJAS</div>
+    <h1>വിവാഹത്തിന് അനുയോജ്യമായ ആലോചനകൾ കണ്ടെത്താം</h1>
+    <p class="sub">ഇജാസ് | ചേളാരി, മലപ്പുറം</p>
+    <span class="pill">നിങ്ങൾക്ക് അനുയോജ്യമായ സേവനം തിരഞ്ഞെടുക്കാം</span>
+  </header>
+
+  <section class="card">
+    <h2>💻 1. Online Service</h2>
+    <p class="price">പൂർണ്ണമായും സൗജന്യം</p>
+    <p>വെബ്സൈറ്റിൽ രജിസ്റ്റർ ചെയ്താൽ നിങ്ങളുടെ വിവരങ്ങൾക്ക് അനുയോജ്യമായ പ്രൊഫൈലുകൾ ലഭ്യമാണെങ്കിൽ Matching Profiles-ൽ കാണാം. ഇഷ്ടപ്പെട്ട പ്രൊഫൈലിന് Interest അയക്കാം. അവർ Accept ചെയ്താൽ കോൺടാക്ട് നമ്പർ കാണാം.</p>
+    <a class="btn" href="https://matchwithijas.com/register" target="_blank" rel="noopener">സൗജന്യമായി രജിസ്റ്റർ ചെയ്യുക</a>
+  </section>
+
+  <section class="card">
+    <h2>🤝 2. Offline Assisted Service</h2>
+    <p class="price">രജിസ്ട്രേഷൻ ഫീസ്: ₹1,999</p>
+    <p>നിങ്ങളെ നേരിട്ട് കണ്ട്, നിങ്ങളുടെ ആവശ്യങ്ങളും താൽപര്യങ്ങളും മനസ്സിലാക്കി അനുയോജ്യമായ വിവാഹ ആലോചനകൾ കണ്ടെത്തി നൽകുന്ന സേവനമാണിത്.</p>
+    <p><strong>👩 പെൺകുട്ടികൾക്ക് നിലവിൽ സൗജന്യം.</strong></p>
+    <p class="note">ഈ സേവനം ആവശ്യപ്പെടുന്നവർ താഴെയുള്ള ഫോം പൂരിപ്പിക്കുക. വിവരങ്ങൾ ലഭിച്ച ശേഷം ബന്ധപ്പെടുന്നതാണ്.</p>
+    <a class="btn secondary" href="#offline-form">Offline Service-ന് അപേക്ഷിക്കുക</a>
+  </section>
+
+  <section class="card" id="offline-form">
+    <h2>📝 Offline Service രജിസ്ട്രേഷൻ ഫോം</h2>
+    <p class="note">വിവാഹം നോക്കുന്ന വ്യക്തിയുടെ വിവരങ്ങൾ മാത്രം കൃത്യമായി നൽകുക. <span class="required">*</span> അടയാളപ്പെടുത്തിയവ നിർബന്ധമാണ്.</p>
+    <form id="leadForm">
+      <div>
+        <label for="forWhom">ആർക്കു വേണ്ടിയാണ് വിവാഹം നോക്കുന്നത്? <span class="required">*</span></label>
+        <select id="forWhom" name="forWhom" required>
+          <option value="">തിരഞ്ഞെടുക്കുക</option><option>സ്വന്തത്തിന്</option><option>മകൻ</option><option>മകൾ</option><option>സഹോദരൻ</option><option>സഹോദരി</option><option>മറ്റുള്ളവർ</option>
+        </select>
+      </div>
+      <div class="grid">
+        <div><label for="age">വയസ്സ് <span class="required">*</span></label><input id="age" name="age" type="number" min="18" max="100" required placeholder="ഉദാ: 27"></div>
+        <div><label for="marital">വിവാഹ സ്റ്റാറ്റസ് <span class="required">*</span></label><select id="marital" name="marital" required><option value="">തിരഞ്ഞെടുക്കുക</option><option>അവിവാഹിതൻ / അവിവാഹിത</option><option>വിവാഹമോചിതൻ / വിവാഹമോചിത</option><option>വിധവ / വിധുരൻ</option></select></div>
+        <div><label for="religion">മതം <span class="required">*</span></label><input id="religion" name="religion" required placeholder="മതം"></div>
+        <div><label for="sect">Cast / Sect</label><input id="sect" name="sect" placeholder="വിഭാഗം / സമുദായം"></div>
+      </div>
+      <div><label for="education">വിദ്യാഭ്യാസ യോഗ്യത</label><input id="education" name="education" placeholder="ഉദാ: Degree, PG"></div>
+      <div><label for="job">ജോലി / തൊഴിൽ വിവരങ്ങൾ</label><input id="job" name="job" placeholder="ജോലി / തൊഴിൽ"></div>
+      <div class="grid">
+        <div><label for="district">ജില്ല <span class="required">*</span></label><input id="district" name="district" required placeholder="ജില്ല"></div>
+        <div><label for="place">സ്ഥലം <span class="required">*</span></label><input id="place" name="place" required placeholder="സ്ഥലം"></div>
+      </div>
+      <div><label for="phone">Contact Number <span class="required">*</span></label><input id="phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9+ ()-]{10,18}" required placeholder="മൊബൈൽ നമ്പർ"></div>
+      <button class="btn submit" type="submit">വിവരങ്ങൾ സമർപ്പിക്കുക</button>
+      <div id="status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>📌 ശ്രദ്ധിക്കുക</h2>
+    <p>ഫോമിൽ നൽകുന്ന വിവരങ്ങൾ Offline Service സംബന്ധിച്ച് നിങ്ങളെ ബന്ധപ്പെടുന്നതിനായി മാത്രമാണ് ഉപയോഗിക്കുന്നത്. ദയവായി ശരിയായ വിവരങ്ങൾ നൽകുക.</p>
+    <p class="note">കൂടുതൽ വിവരങ്ങൾക്ക് WhatsApp: 9746900055</p>
+  </section>
+  <footer>© Match With Ijas · Chelari, Malappuram</footer>
+</div>
+
+<script>
+  // Google Apps Script Web App URL ഇവിടെ ചേർക്കുക.
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQp4NsCe6dRtMI_hHDc3Gj3Edrp9TynuNUBwIk5KtI0GTZtU0hzdWDTconvJ-26ggQkQ/exec";
+
+  const form = document.getElementById("leadForm");
+  const statusBox = document.getElementById("status");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (GOOGLE_SCRIPT_URL.startsWith("PASTE_")) {
+      statusBox.textContent = "ഫോം കണക്റ്റ് ചെയ്യാൻ Google Apps Script URL ചേർക്കേണ്ടതുണ്ട്.";
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.timestamp = new Date().toISOString();
+    const button = form.querySelector("button[type=submit]");
+    button.disabled = true; button.textContent = "സമർപ്പിക്കുന്നു...";
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
+        body: new URLSearchParams(data).toString()
+      });
+      statusBox.textContent = "നന്ദി! നിങ്ങളുടെ വിവരങ്ങൾ സമർപ്പിച്ചു. ഞങ്ങൾ ബന്ധപ്പെടുന്നതാണ്.";
+      form.reset();
+    } catch (error) {
+      statusBox.textContent = "സമർപ്പിക്കാൻ കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ WhatsApp ചെയ്യുക.";
+    } finally {
+      button.disabled = false; button.textContent = "വിവരങ്ങൾ സമർപ്പിക്കുക";
+    }
+  });
+</script>
+</body>
+</html>
